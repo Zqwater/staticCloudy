@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>管理员登录</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/admin_login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>管理员登录</h1>
+      <form id="loginForm" method="POST" action="/admin/login">
+        <div class="input-group">
+          <input type="text" id="username" name="username" placeholder="请输入用户名">
+        </div>
+        <div class="input-group">
+          <input type="password" id="password" name="password" placeholder="请输入密码">
+        </div>
+        <button type="submit">登录</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/admin_login.js"></script>
+</body>
+</html>

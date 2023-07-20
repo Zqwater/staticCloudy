@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>静云谷</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    a {
+        text-decoration: none; /* 去除链接的下划线 */
+    }
+    /* 添加背景容器的样式 */
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0;
+      animation: backgroundAnimation 30s linear infinite;
+      background-size: cover;
+    }
+
+    @keyframes backgroundAnimation {
+      0% {
+        opacity: 0;
+        background-position: 0 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        background-position: -200% 0;
+      }
+    }
+
+    @keyframes changeColor {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+      100% {
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    #background:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 10%, rgba(255, 255, 255, 0) 20%);
+      pointer-events: none;
+      animation: changeColor 20s linear infinite;
+    }
+
+    #background:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse closest-side, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0) 50%);
+      pointer-events: none;
+      animation: changeColor 15s linear infinite reverse;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script>
+    function changeBackground() {
+      var backgrounds = [
+        '/static/image/bg/bg1.jpg',
+        '/static/image/bg/bg2.jpg',
+        '/static/image/bg/bg3.jpg',
+        '/static/image/bg/bg4.jpg',
+        '/static/image/bg/bg5.jpg'
+      ];
+      var randomIndex = Math.floor(Math.random() * backgrounds.length);
+      var randomBackground = backgrounds[randomIndex];
+      document.getElementById('background').style.backgroundImage = "url('" + randomBackground + "')";
+    }
+
+    $(document).ready(function() {
+      changeBackground();
+      setInterval(changeBackground, 60000); // Change background every 1 minute
+
+      $('.search-icon').click(function() {
+        var query = $('.search-bar input[type="text"]').val();
+        if (query.trim() !== '') {
+          // Perform search operation
+          alert('Searching: ' + query);
+        }
+      });
+
+      $('.search-bar input[type="text"]').keydown(function(event) {
+        if (event.keyCode === 13) {
+          var query = $('.search-bar input[type="text"]').val();
+          if (query.trim() !== '') {
+            // Perform search operation
+            alert('Searching: ' + query);
+          }
+        }
+      });
+
+      $('.api-scroll-container').on('click', '.api-item', function() {
+        var port = $(this).data('port');
+        var currentURL = window.location.href;
+        var newURL = currentURL.replace(/:\d+/, ":" + port);
+        window.location.href = newURL;
+      });
+
+      $('.api-scroll-container').on('scroll', function() {
+        var scrollLeft = $(this).scrollLeft();
+        if (scrollLeft <= 0) {
+          $('.api-scroll-left').hide();
+        } else {
+          $('.api-scroll-left').show();
+        }
+
+        var containerWidth = $(this).outerWidth();
+        var contentWidth = $(this).find('.api-list').outerWidth();
+        if (scrollLeft >= contentWidth - containerWidth) {
+          $('.api-scroll-right').hide();
+        } else {
+          $('.api-scroll-right').show();
+        }
+      });
+
+      $('.api-scroll-left').click(function() {
+        var scrollContainer = $('.api-scroll-container');
+        scrollContainer.animate({ scrollLeft: '-=300' }, 300);
+      });
+
+      $('.api-scroll-right').click(function() {
+        var scrollContainer = $('.api-scroll-container');
+        scrollContainer.animate({ scrollLeft: '+=300' }, 300);
+      });
+
+      // 新增二维码放大功能
+      $('.qr-code-item img').click(function() {
+        var src = $(this).attr('src');
+        var alt = $(this).attr('alt');
+        var qrCodeImage = $('<img>').attr('src', src).attr('alt', alt).addClass('qr-code-image');
+        var qrCodeModal = $('<div>').addClass('qr-code-modal').append(qrCodeImage);
+        $('body').append(qrCodeModal);
+
+        $('.qr-code-modal').click(function() {
+          $(this).remove();
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="background"></div>
+
+  <div class="container">
+    <div class="search-wrapper">
+      <div class="logo">
+        <img src="/static/image/StaticCloudy.jpeg" alt="Logo">
+        <h1>静云谷</h1>
+      </div>
+      <div class="search-bar-container">
+        <div class="search-bar">
+          <input id="search-input" type="text" placeholder="搜索导航">
+          <i class="search-icon fas fa-search"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="api-container">
+      <div class="api-scroll-container">
+        <div class="api-scroll-left" style="display: none;">&lt;</div>
+        <div class="api-list">
+          <div class="api-item" data-port="9000">
+            <img src="/static/image/api/staticGPT.jpeg" alt="API 1">
+            <h3>StaticGPT</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="api-item" data-port="8899">
+            <img src="/static/image/api/pandora.jpeg" alt="API 2">
+            <h3>StaticPandora</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="api-item" data-port="9100">
+            <img src="/static/image/api/nextGPT.jpeg" alt="API 3">
+            <h3>StaticNext</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div class="api-scroll-right">&gt;</div>
+      </div>
+    </div>
+
+    <!-- 文章列表 -->
+    <h2>近期文章</h2>
+    <div class="api-container">
+        <ul class="article-list">
+            {{ range .latestArticles }}
+            <li data-href="/articles/{{ .ID }}/view">
+                <div class="article-item">
+                <div class="article-image" style="background-image: url('../{{ .Cover }}')"></div>
+                <div class="article-content">
+                    <h2>{{ .Title }}</h2>
+                    <p>简介：{{ .Summary }}</p>
+                    <div class="metadata">
+                    <p class="author">作者：{{ .Author }}</p>
+                    <p class="publish-date">发布时间：{{ .PublishDate }}</p>
+                    <p class="views">访问量：{{ .Views }} Views</p>
+                    <p class="likes">点赞数：{{ .Likes }} Likes</p>
+                    </div>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+
+    <h2>热门文章</h2>
+    <div class="api-container">
+        <ul class="article-list">
+            {{ range .popularArticles }}
+            <li data-href="/articles/{{ .ID }}/view">
+                <div class="article-item">
+                <div class="article-image" style="background-image: url('../{{ .Cover }}')"></div>
+                <div class="article-content">
+                    <h2>{{ .Title }}</h2>
+                    <p>简介：{{ .Summary }}</p>
+                    <div class="metadata">
+                    <p class="author">作者：{{ .Author }}</p>
+                    <p class="publish-date">发布时间：{{ .PublishDate }}</p>
+                    <p class="views">访问量：{{ .Views }} Views</p>
+                    <p class="likes">点赞数：{{ .Likes }} Likes</p>
+                    </div>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+
+    <h2>用户最爱</h2>
+    <div class="api-container">
+        <ul class="article-list">
+            {{ range .topLikedArticles }}
+            <li data-href="/articles/{{ .ID }}/view">
+                <div class="article-item">
+                <div class="article-image" style="background-image: url('../{{ .Cover }}')"></div>
+                    <div class="article-content">
+                        <h2>{{ .Title }}</h2>
+                        <p>简介：{{ .Summary }}</p>
+                        <div class="metadata">
+                        <p class="author">作者：{{ .Author }}</p>
+                        <p class="publish-date">发布时间：{{ .PublishDate }}</p>
+                        <p class="views">访问量：{{ .Views }} Views</p>
+                        <p class="likes">点赞数：{{ .Likes }} Likes</p>
+                    </div>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    
+    <div class="qr-code">
+      <h2>关注我们</h2>
+      <div class="qr-code-row">
+        <div class="qr-code-item">
+          <img src="/static/image/qrcode/wechat.jpg" alt="微信二维码">
+          <p>微信</p>
+        </div>
+        <div class="qr-code-item">
+          <img src="/static/image/qrcode/qq.jpg" alt="QQ二维码">
+          <p>QQ</p>
+        </div>
+        <div class="qr-code-item">
+          <img src="/static/image/qrcode/bilibili.jpg" alt="B站二维码">
+          <p>BiLiBiLi</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/script.js"></script>
+  <script>
+    // 给每个 <li> 元素添加点击事件处理程序
+    const liElements = document.querySelectorAll('.article-list li');
+    liElements.forEach(li => {
+        li.addEventListener('click', () => {
+            const href = li.getAttribute('data-href');
+            if (href) {
+                window.location.href = href; // 跳转到对应链接
+            }
+        });
+    });
+  </script>
+
+</body>
+</html>

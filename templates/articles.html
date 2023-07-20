@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>静云谷文库</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/articles.css">
+    <style>
+        a {
+            text-decoration: none; /* 去除链接的下划线 */
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="container">
+        <h1 class="mb-5">静云谷文库</h1>
+
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <input class="search-input" type="text" id="searchQuery" placeholder="请输入搜索关键词">
+            <button class="search-button" onclick="searchArticles()">搜索</button>
+        </div>
+
+        <!-- 文章列表 -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {{ range .articles }}
+            <div class="col">
+                <a href="/articles/{{ .ID }}/view" class="article-link">
+                    <div class="article-item card h-100">
+                        <div class="article-image card-img-top" style="background-image: url('../{{ .Cover }}')"></div>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ .Title }}</h2>
+                            <p class="card-text">简介：{{ .Summary }}</p>
+                            <div class="metadata">
+                                <p class="card-text">作者：{{ .Author }}</p>
+                                <p class="card-text">发布时间：{{ .PublishDate }}</p>
+                                <p class="card-text">访问量：{{ .Views }} Views</p>
+                                <p class="card-text">点赞数：{{ .Likes }} Likes</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- 分页导航 -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center mt-4">
+                {{ if .searchQuery }}
+                {{ $searchQuery := .searchQuery }}
+                <li class="page-item{{ if eq .currentPage 1 }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?searchQuery={{ $searchQuery }}&page=1">首页</a>
+                </li>
+                <li class="page-item{{ if eq .currentPage 1 }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?searchQuery={{ $searchQuery }}&page={{ minus .currentPage 1 }}">上一页</a>
+                </li>
+                <li class="page-item{{ if eq .currentPage .totalPages }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?searchQuery={{ $searchQuery }}&page={{ plus .currentPage 1 }}">下一页</a>
+                </li>
+                <li class="page-item{{ if eq .currentPage .totalPages }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?searchQuery={{ $searchQuery }}&page={{ .totalPages }}">尾页</a>
+                </li>
+                {{ else }}
+                <li class="page-item{{ if eq .currentPage 1 }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?page=1">首页</a>
+                </li>
+                <li class="page-item{{ if eq .currentPage 1 }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?page={{ minus .currentPage 1 }}">上一页</a>
+                </li>
+                <li class="page-item{{ if eq .currentPage .totalPages }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?page={{ plus .currentPage 1 }}">下一页</a>
+                </li>
+                <li class="page-item{{ if eq .currentPage .totalPages }} disabled{{ end }}">
+                    <a class="page-link" href="/articles?page={{ .totalPages }}">尾页</a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // 文艺感的动态背景
+        var background = document.querySelector(".background");
+        var colors = ["#cc99ff", "#ff99cc", "#66cc99", "#ffcc99", "#99ccff"];
+        var step = 0;
+
+        function changeBackground() {
+            background.style.background = "linear-gradient(45deg, " + colors[step % colors.length] + " 0%, " + colors[(step + 1) % colors.length] + " 100%)";
+            step++;
+        }
+        setInterval(changeBackground, 10000); // 每隔10秒切换一次背景色
+
+        // 搜索文章函数
+        function searchArticles() {
+            const searchQuery = document.getElementById("searchQuery").value;
+            // 将搜索关键词作为查询参数，跳转到搜索结果页面
+            window.location.href = `/articles?searchQuery=${encodeURIComponent(searchQuery)}&page=1`;
+        }
+    </script>
+</body>
+</html>

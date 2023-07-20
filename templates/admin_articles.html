@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>文章管理</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/admin_articles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>文章管理</h1>
+      <div class="admin-info">
+        <div class="admin-avatar">
+          <img src="/static/image/background.jpg" alt="管理员头像">
+        </div>
+        <div class="admin-details">
+          <p class="admin-username">{{ .username }}</p>
+          <button class="logout-btn" onclick="logout()">退出登录</button>
+        </div>
+      </div>
+    </header>
+    
+    <section class="search-section">
+      <form class="search-form" onsubmit="searchArticles(event)">
+        <input type="text" id="search-input" placeholder="搜索文章">
+        <input type="submit" value="搜索">
+      </form>
+    </section>
+
+    <!-- 文章列表 -->
+    <ul class="article-list">
+      {{ range .articles }}
+      <li>
+        <div class="article-item">
+          <div class="article-image" style="background-image: url('../{{ .Cover }}')"></div>
+          <div class="article-content">
+            <h2>{{ .Title }}</h2>
+            <p>{{ .Summary }}</p>
+            <div class="metadata">
+              <p class="author">作者：{{ .Author }}</p>
+              <p class="views">访问量：{{ .Views }} Views</p>
+              <p class="likes">点赞数：{{ .Likes }} Likes</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a href="/admin/articles/{{ .ID }}/edit">编辑</a>
+            <a href="#" onclick="confirmDelete('{{ .ID }}')">删除</a>
+          </div>
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+
+    <p>欢迎进入文章管理。</p>
+    <p><a href="/admin/articles/new">创建新文章</a></p>
+  </div>
+  <script src="/static/js/admin_dashboard.js"></script>
+  <script src="/static/js/admin_articles.js"></script>
+</body>
+</html>

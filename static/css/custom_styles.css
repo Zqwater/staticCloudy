@@ -1,0 +1,105 @@
+/* custom_styles.css */
+body {
+    color: #333; /* 主要文字颜色 */
+    line-height: 1.6;
+    font-family: 'Helvetica', sans-serif; /* 统一设置字体 */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* 将容器的背景色改为白色 */
+    border-radius: 10px; /* 添加边框圆角 */
+}
+
+h1 {
+    font-size: 40px; /* 标题字号 */
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.article-content p {
+    font-size: 18px; /* 正文字号 */
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.article-content p:first-child {
+    font-size: 20px; /* 文章简介字号 */
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.metadata {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.metadata p {
+    margin: 5px 0;
+}
+
+.background {
+    transition: background-color 0.5s ease; /* 添加背景颜色过渡效果 */
+}
+
+/* 社交分享按钮样式 */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-buttons .btn {
+    margin-right: 10px;
+}
+
+.social-buttons .btn:last-child {
+    margin-right: 0;
+}
+
+/* 添加自定义字体 */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+/* 添加导航链接样式 */
+.navbar {
+    padding: 10px 0;
+    background-color: #f8f8f8; /* 导航栏背景色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加轻微阴影效果 */
+}
+
+.navbar-brand {
+    font-size: 28px; /* 增大导航字体大小 */
+    font-weight: bold; /* 加粗字体 */
+    color: #555; /* 导航字体颜色 */
+    text-decoration: none; /* 移除默认下划线效果 */
+    transition: color 0.3s ease; /* 添加颜色过渡效果 */
+}
+
+.navbar-brand:hover {
+    color: #333; /* 鼠标悬停时改变字体颜色 */
+}
+
+/* 导航链接样式 */
+.navbar-nav .nav-item {
+    margin-right: 15px; /* 导航链接之间的右侧间距 */
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px; /* 导航链接字体大小 */
+    color: #777; /* 导航链接字体颜色 */
+    text-decoration: none; /* 移除默认下划线效果 */
+    transition: color 0.3s ease; /* 添加颜色过渡效果 */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333; /* 鼠标悬停时改变字体颜色 */
+}

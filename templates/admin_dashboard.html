@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>管理员仪表盘</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/admin_dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>管理员仪表盘</h1>
+      <div class="admin-info">
+        <div class="admin-avatar">
+          <img src="/static/image/background.jpg" alt="管理员头像">
+        </div>
+        <div class="admin-details">
+          <p class="admin-username">{{ .username }}</p>
+          <button class="logout-btn" onclick="logout()">退出登录</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="search-section">
+      <form class="search-form" onsubmit="searchArticles(event)">
+        <input type="text" id="search-input" placeholder="搜索文章">
+        <input type="submit" value="搜索">
+      </form>
+    </section>
+
+    <section class="article-section">
+      <h2>文章管理</h2>
+      <ul class="article-list">
+        {{ range .articles }}
+        <li>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Content }}</p>
+          <div class="actions">
+            <a href="/admin/articles/{{ .ID }}/edit">编辑</a>
+            <a href="/admin/articles/{{ .ID }}/delete">删除</a>
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+
+    <section class="create-article">
+        <p><a href="/admin/articles">文章管理主页</a></p>
+      <p><a href="/admin/articles/new">创建新文章</a></p>
+    </section>
+  </div>
+
+  <script src="/static/js/admin_dashboard.js"></script>
+</body>
+</html>

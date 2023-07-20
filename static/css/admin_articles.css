@@ -1,0 +1,198 @@
+/* 添加以下代码到您的 admin_articles.css 文件中 */
+
+/* 全局样式 */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* 标题栏样式 */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #afbbc5;
+  }
+  
+  .admin-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .admin-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .admin-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .admin-details {
+    margin-left: 10px;
+  }
+  
+  .admin-username {
+    margin: 0;
+    font-size: 16px;
+    color: #bfc6cd;
+  }
+  
+  /* 搜索栏样式 */
+  .search-section {
+    margin-bottom: 40px;
+  }
+  
+  .search-form {
+    display: flex;
+  }
+  
+  .search-form input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .search-form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #b0b8bf;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  /* 文章列表样式 */
+  .article-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .article-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  .article-image {
+    width: 280px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    margin-right: 20px;
+  }
+  
+  .article-content {
+    flex-grow: 1;
+  }
+  
+  .article-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .article-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .metadata {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .metadata p {
+    font-size: 12px;
+  }
+  
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .actions a {
+    flex: 0 0 auto;
+    background-color: #1890ff;
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .actions a:hover {
+    background-color: #0e86d4;
+  }
+  
+  .actions a.edit {
+    background-color: #52c41a;
+  }
+  
+  .actions a.delete {
+    background-color: #ff4d4f;
+  }
+  
+  .actions a.edit:hover {
+    background-color: #44b914;
+  }
+  
+  .actions a.delete:hover {
+    background-color: #e53935;
+  }
+  
+  /* 布局自适应 */
+  @media only screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .search-form {
+      flex-direction: column;
+    }
+  
+    .search-form input[type="text"] {
+      margin-bottom: 10px;
+    }
+  
+    .article-item {
+      flex-direction: column;
+    }
+  
+    .article-image {
+      width: 200px;
+      height: 150px;
+      margin-right: 0;
+      margin-bottom: 10px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+  }
+  

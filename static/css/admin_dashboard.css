@@ -1,0 +1,120 @@
+/* 全局样式 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #1890ff;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+}
+
+.admin-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.admin-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-details {
+  margin-left: 10px;
+}
+
+.admin-username {
+  margin: 0;
+  font-size: 16px;
+  color: #1890ff;
+}
+
+.search-section {
+  margin-bottom: 40px;
+}
+
+.search-form {
+  display: flex;
+}
+
+.search-form input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.search-form input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #1890ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.article-section {
+  margin-bottom: 40px;
+}
+
+.article-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.article-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.article-list h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1890ff;
+}
+
+.actions a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.create-article {
+  text-align: center;
+}
+
+.welcome-message {
+  font-size: 18px;
+  margin-bottom: 10px;
+}

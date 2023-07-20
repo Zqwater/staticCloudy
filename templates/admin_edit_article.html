@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>编辑文章</title>
+  <link rel="stylesheet" href="/static/css/admin_edit_article.css">
+  <style>
+    /* 这里可以添加你需要自定义的样式 */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>编辑文章</h1>
+    <form method="POST" action="/admin/articles/{{ .article.ID }}?_method=PUT" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">标题</label>
+        <input type="text" id="title" name="Title" value="{{ .article.Title }}" required>
+      </div>
+      <div class="form-group">
+        <label for="author">作者</label>
+        <input type="text" id="author" name="Author" value="{{ .article.Author }}" required>
+      </div>
+      <div class="form-group">
+        <label for="content">内容</label>
+        <textarea id="content" name="Content" required>{{ .article.Content }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="cover">修改封面图片</label>
+        <input type="file" id="cover" name="Cover" accept="image/*" onchange="previewImage(event)">
+        <img id="preview" src="/{{ .article.Cover }}" alt="封面预览" style="max-width:300px;">
+      </div>
+      <div class="form-group">
+        <label for="summary">简介</label>
+        <textarea id="summary" name="Summary">{{ .article.Summary }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="publish-date">发布日期</label>
+        <input type="datetime-local" id="publish-date" name="PublishDate" value="{{ .article.PublishDate.Format "2006-01-02T15:04" }}" required>
+      </div>
+      <button type="submit">保存</button>
+    </form>
+  </div>
+
+  <script>
+    function previewImage(event) {
+      const fileInput = event.target;
+      const imagePreview = document.getElementById('preview');
+  
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+  
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+        }
+  
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        imagePreview.src = '{{ .article.Cover }}';
+      }
+    }
+  </script>
+
+</body>
+</html>
